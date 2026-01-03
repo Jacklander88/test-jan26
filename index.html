@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker — śledź swój postęp!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Nagłówek */
+        .header {
+            background-color: #8b0000;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Przycisk logowania */
+        .login-button {
+            display: inline-block;
+            background-color: #a52a2a;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            margin-left: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: #8b0000;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Sekcja Hero */
+        .hero {
+            background: linear-gradient(135deg, #8b0000, #a52a2a);
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #fff;
+            color: #8b0000;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 30px;
+            margin-top: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .cta-button:hover {
+            background-color: #8b0000;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Sekcja Features — kafelki w jednym wierszu */
+        .features {
+            padding: 6rem 2rem;
+            background-color: #fff;
+        }
+
+        .features h3 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #8b0000;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-box {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Stylizacja ikon FontAwesome */
+        .fa-heart,
+        .fa-step-forward,
+        .fa-chart-line,
+        .fa-user {
+            color: #8b0000;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-box h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #8b0000;
+        }
+
+        .feature-box p {
+            color: #666;
+        }
+
+        /* Sekcja Pricing — kafelki dopasowane do siebie */
+        .pricing {
+            padding: 6rem 2rem;
+            background-color: #f8f9fa;
+        }
+
+        .pricing h3 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #8b0000;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            min-height: 250px; /* Minimalna wysokość */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pricing-card .pricing-header {
+            font-size: 1.5rem;
+            color: #8b0000;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #8b0000;
+            margin: 1rem 0;
+        }
+
+        .pricing-card .pricing-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card .pricing-button {
+            margin-top: auto; /* Przycisk na dole */
+            background-color: #8b0000;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card .pricing-button:hover {
+            background-color: #6b0000;
+            transform: scale(1.05);
+        }
+
+        /* Stopka */
+        .footer {
+            background-color: #8b0000;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nagłówek -->
+    <header class="header">
+        <h1>Fitness Tracker</h1>
+        <p>Śledź swój postęp i osiągaj cele!</p>
+        <a href="#" class="login-button">Zaloguj się</a>
+    </header>
+
+    <!-- Sekcja Hero -->
+    <section class="hero">
+        <h2>Śledź swój postęp, osiągaj cele i zdrowo żyj!</h2>
+        <p>Nowa aplikacja, która pomaga Ci monitorować aktywność, zdrowie i postępy treningowe w czasie rzeczywistym.</p>
+        <a href="#pricing" class="cta-button">Zacznij teraz — bezpłatnie!</a>
+    </section>
+
+    <!-- Sekcja Features — kafelki w jednym wierszu -->
+    <section class="features">
+        <h3>Co oferujemy</h3>
+        <div class="feature-grid">
+            <div class="feature-box">
+                <i class="fas fa-heart"></i>
+                <h4>Śledzenie kalorii</h4>
+                <p>Śledź ilość kalorii spalanych i pobieranych — idealne dla diety i kontroli wagi.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-step-forward"></i>
+                <h4>Analiza kroków</h4>
+                <p>Monitoruj codzienną aktywność — od kroków do dystansu i wydolności.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-chart-line"></i>
+                <h4>Wykresy i statystyki</h4>
+                <p>Wizualizuj postępy w czasie rzeczywistym — z wykresami i raportami.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-user"></i>
+                <h4>Ustawienia indywidualne</h4>
+                <p>Dostosuj aplikację pod Twoje cele — od siłowni po treningi cardio.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja Pricing — kafelki dopasowane do siebie -->
+    <section class="pricing">
+        <h3>Cennik</h3>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-header">Basic</div>
+                <div class="pricing-price">$0 / miesiąc</div>
+                <p class="pricing-description">Dostęp do podstawowych funkcji — idealne dla początkujących.</p>
+                <a href="#" class="pricing-button">Zarejestruj się</a>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-header">Premium</div>
+                <div class="pricing-price">$4.99 / miesiąc</div>
+                <p class="pricing-description">Wszystkie funkcje + wykresy zaawansowane, wsparcie i eksport.</p>
+                <a href="#" class="pricing-button">Zarejestruj się</a>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-header">Pro</div>
+                <div class="pricing-price">$9.99 / miesiąc</div>
+                <p class="pricing-description">Wszystko + analiza treningowa, AI coach i integracja z urządzeniami.</p>
+                <a href="#" class="pricing-button">Zarejestruj się</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer class="footer">
+        <p>&copy; 2025 Fitness Tracker. Wszystkie prawa zastrzeżone.</p>
+        <p><a href="#">Polityka prywatności</a> | <a href="#">Warunki korzystania</a></p>
+        <p>Skontaktuj się z nami: <a href="mailto:support@fittrack.pl">support@fittrack.pl</a></p>
+    </footer>
+
+</body>
+</html>
